@@ -1,0 +1,11 @@
+[user]
+	email = kirchler123@gmail.com
+	name = Nis5l
+[init]
+	defaultBranch = master
+[difftool]
+    prompt = true
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""

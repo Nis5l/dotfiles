@@ -21,6 +21,7 @@ alias clip="kitty +kitten clipboard"
 alias ssh="kitty +kitten ssh"
 alias torbrowser="env LD_PRELOAD=/home/nissl/.local/share/torbrowser/tbb/x86_64/tor-browser_en-US/shim.so torbrowser-launcher"
 alias snip="scrot -s /tmp/screenshot.jpg"
+alias mountphone="sudo simple-mtpfs -o allow_other /mnt/phone"
 #alias less="less -r"
 
 # Put your fun stuff here.
@@ -33,6 +34,6 @@ export NVM_DIR="$HOME/.nvm"
 PATH="${HOME}/.local/bin:/opt/idea-IC-222.3345.118/bin:${PATH}"
 export PATH
 set -o vi
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export NODE_OPTIONS=--max_old_space_size=4096

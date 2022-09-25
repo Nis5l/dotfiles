@@ -67,6 +67,7 @@ require('packer').startup(function()
 
 	--git
 	use 'mhinz/vim-signify'
+	use 'f-person/git-blame.nvim'
 
 	--Telecope
 	use {
@@ -151,6 +152,9 @@ require('packer').startup(function()
 	use { 'mechatroner/rainbow_csv' }
 end)
 
+vim.g.gitblame_enabled = 0
+vim.g.gitblame_message_template = '<sha> • <summary> • <date> • <author>'
+
 vim.g.leetcode_browser = "firefox"
 vim.g.leetcode_solution_filetype = "c"
 
@@ -161,8 +165,7 @@ vim.opt.updatetime = 100
 
 vim.g.rainbow_active = 1
 
-vim.g.tokyonight_style = 'night'
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme tokyonight-night]]
 
 vim.api.nvim_set_keymap('n', '<C-z>', '<CMD>lua require("FTerm").toggle()<CR>', { silent = true })
 vim.api.nvim_set_keymap('t', '<C-z>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', { silent = true})
@@ -195,14 +198,14 @@ vim.g.coq_settings = {
 	['keymap.jump_to_mark'] = '',
 	["clients.snippets.warn"] = {},
 	--https://github.com/ms-jpq/coq_nvim/issues/92
-	['clients.lsp.weight_adjust'] = 1.4,
+	['clients.lsp.always_on_top'] = {},
 --	["clients.tabnine.enabled"] = true,
 --	["display.pum.x_truncate_len"] = 1000,
 }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "tsserver", "rust_analyzer", "jdtls" }
+    ensure_installed = { "tsserver", "rust_analyzer", "jdtls", "cssls" }
 })
 
 local lsp = require "lspconfig"
@@ -221,6 +224,7 @@ lsp.pylsp.setup(setup())
 lsp.intelephense.setup(setup({cmd = { "intelephense", "--stdio" }}))
 lsp.jdtls.setup(setup())
 lsp.ccls.setup(setup())
+lsp.cssls.setup(setup())
 
 require("lsp_signature").setup({})
 

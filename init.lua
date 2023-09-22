@@ -38,9 +38,13 @@ require('packer').startup(function()
 			}
 		end,
 	}
-	use {
+	--[[ use {
 		'p00f/nvim-ts-rainbow',
 		requires = { "nvim-treesitter/nvim-treesitter" },
+	} ]]
+
+	use {
+		'hiphish/rainbow-delimiters.nvim'
 	}
 
 	use {
@@ -79,10 +83,10 @@ require('packer').startup(function()
 				highlight = {
 					enable = true,
 				},
-				rainbow = {
+				--[[ rainbow = {
 					enable = true,
 					extended_mode = true,
-				}
+				} ]]
 			}
 		end,
 	}
@@ -150,6 +154,18 @@ require('packer').startup(function()
 	use { 'dstein64/vim-startuptime' }
 
 	use { 'mechatroner/rainbow_csv' }
+
+	use { 'RRethy/vim-illuminate' }
+
+	use {
+	  'rmagatti/auto-session',
+	  config = function()
+		require("auto-session").setup {
+		  log_level = "error",
+		  auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+		}
+	  end
+	}
 end)
 
 vim.g.gitblame_enabled = 0
@@ -163,7 +179,7 @@ vim.opt.termguicolors = true
 --signify
 vim.opt.updatetime = 100
 
-vim.g.rainbow_active = 1
+-- vim.g.rainbow_active = 1
 
 vim.cmd[[colorscheme tokyonight-night]]
 
@@ -246,5 +262,4 @@ require("scrollbar").setup({
 
 --https://github.com/ray-x/lsp_signature.nvim
 --https://github.com/mhinz/vim-crates
---https://github.com/RRethy/vim-illuminate
 --https://github.com/jbyuki/instant.nvim

@@ -32,6 +32,7 @@ source /usr/share/nvm/init-nvm.sh
 #. "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
+#export NVM_DIR="/usr/share/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
@@ -42,3 +43,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export NODE_OPTIONS=--max_old_space_size=4096
 export PS1='\[\e[38;5;148m\]\u\[\e[38;5;147m\]@\[\e[38;5;175m\]\H \[\e[38;5;153m\]\w\[\e[0m\]> '
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

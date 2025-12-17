@@ -12,4 +12,4 @@ if shopt -q login_shell; then
 else
 	exit 1
 fi
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"

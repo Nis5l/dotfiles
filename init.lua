@@ -79,7 +79,13 @@ require('packer').startup(function()
 		run = [[:TSUpdate]],
 		config = function()
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = "all",
+				ensure_installed = {
+					"lua", "c", "python", "rust", "javascript", "typescript", "html", "css", "bash", "json"
+				},
+				auto_install = false,
+				ignore_install = {
+					"haskell", "ipkg"
+				},
 				highlight = {
 					enable = true,
 				},
@@ -219,28 +225,36 @@ vim.g.coq_settings = {
 --	["display.pum.x_truncate_len"] = 1000,
 }
 
-require("mason").setup()
-require("mason-lspconfig").setup({
-    ensure_installed = { "tsserver", "rust_analyzer", "jdtls", "cssls" }
+vim.diagnostic.config({
+  virtual_text = true,   -- show errors/warnings inline
+  signs = true,          -- gutter signs
+  underline = true,      -- underline errors
+  update_in_insert = false, -- optional: don't update while typing
 })
 
-local lsp = require "lspconfig"
-local coq = require "coq"
+require("mason").setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "ts_ls", "rust_analyzer", "jdtls", "cssls" }
+})
 
-local setup = coq.lsp_ensure_capabilities;
+local coq = require("coq")
+local setup = coq.lsp_ensure_capabilities
+
 --local setup = function()
 --  return {}
 --end
 
-lsp.rust_analyzer.setup(setup())
-lsp.tsserver.setup(setup())
-lsp.vimls.setup(setup())
-lsp.ocamlls.setup(setup())
-lsp.pylsp.setup(setup())
-lsp.intelephense.setup(setup({cmd = { "intelephense", "--stdio" }}))
-lsp.jdtls.setup(setup())
-lsp.ccls.setup(setup())
-lsp.cssls.setup(setup())
+vim.lsp.config("rust_analyzer", setup())
+vim.lsp.config("ts_ls", setup())
+vim.lsp.config("vimls", setup())
+vim.lsp.config("ocamllsp", setup())
+vim.lsp.config("pylsp", setup())
+vim.lsp.config("intelephense", setup({cmd = { "intelephense", "--stdio" }}))
+vim.lsp.config("jdtls", setup())
+vim.lsp.config("ccls", setup())
+vim.lsp.config("cssls", setup())
+vim.lsp.config("clangd", setup())
+vim.lsp.config("docker-language-server", setup())
 
 require("lsp_signature").setup({})
 
